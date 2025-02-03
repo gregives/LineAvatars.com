@@ -2,20 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.flex > * {
+  @apply min-w-0 min-h-0 flex-shrink-0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+strong {
+  @apply font-semibold;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+:focus {
+  @apply outline-none;
+}
+
+:focus-visible {
+  @apply outline-dashed outline-2 outline-offset-4 outline-zinc-900;
 }

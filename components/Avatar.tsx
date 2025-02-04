@@ -1,9 +1,16 @@
-import { Avatar as AvatarType } from "@/types";
+import root from "react-shadow";
+import { AvatarData } from "@/types";
 import { VIEWBOX } from "@/utilities/constants";
+import { buildFeatures } from "@/utilities/features";
 import simplifySvgPath from "@luncheon/simplify-svg-path";
 import { NormalizedLandmark } from "@mediapipe/tasks-vision";
+import { twMerge } from "tailwind-merge";
 
-export function Avatar({ avatar }: { avatar: AvatarType }) {
+type AvatarProperties = JSX.IntrinsicElements["div"] & {
+  avatar: AvatarData;
+};
+
+export function Avatar({ avatar, className, ...properties }: AvatarProperties) {
   const translateX = Math.min(
     Math.max(
       (0.5 -
@@ -39,132 +46,173 @@ export function Avatar({ avatar }: { avatar: AvatarType }) {
     ] as const;
   };
 
+  const features = buildFeatures(avatar);
+
+  const strokeColor = avatar.customizations?.colors?.outline ?? "#000";
+  const strokeWidth = avatar.customizations?.strokeWidth ?? 1;
+
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 48 48"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="w-full rounded-xl bg-zinc-200"
+    <root.div
+      className={twMerge(
+        "w-full aspect-square rounded-xl overflow-hidden",
+        className
+      )}
+      {...properties}
     >
-      <defs>
-        <path id="face" d={avatar.segments.Face} transform={transform} />
-        <clipPath id="faceClip">
-          <use href="#face" />
-        </clipPath>
-        <path id="body" d={avatar.segments.Body} transform={transform} />
-        <clipPath id="bodyClip">
-          <use href="#body" />
-        </clipPath>
-      </defs>
-      <use href="#body" fill="white" />
-      {avatar.landmarks.shadow && (
-        <path
-          d={simplifySvgPath(
-            avatar.landmarks.shadow.map((point) => pointToViewbox(point))
-          )}
-          fill="#d4d4d4"
-          clipPath="url(#bodyClip)"
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 48 48"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <defs>
+          <path id="face" d={avatar.segments.face} transform={transform} />
+          <clipPath id="faceClip">
+            <use href="#face" />
+          </clipPath>
+          <path id="body" d={avatar.segments.body} transform={transform} />
+          <clipPath id="bodyClip">
+            <use href="#body" />
+          </clipPath>
+        </defs>
+        <rect
+          width={48}
+          height={48}
+          fill={avatar.customizations?.colors?.background ?? "#e4e4e7"}
         />
-      )}
-      <use href="#body" fill="none" stroke="black" strokeWidth={1} />
-      <path
-        d={avatar.segments.Clothes}
-        stroke="black"
-        strokeWidth={0.5}
-        transform={transform}
-      />
-      <use href="#face" fill="white" />
-      {avatar.landmarks.eyes.map((eye, index) => {
-        const [cx, cy] = pointToViewbox(eye);
-
-        return (
-          <ellipse
-            key={index}
-            cx={cx}
-            cy={cy}
-            rx={1}
-            ry={1.25}
-            clipPath="url(#faceClip)"
+        <use
+          href="#body"
+          fill={avatar.customizations?.colors?.body ?? "#fff"}
+        />
+        {features.shadow && (
+          <path
+            d={simplifySvgPath(
+              features.shadow.map((point) => pointToViewbox(point))
+            )}
+            fill={avatar.customizations?.colors?.shadow ?? "#0003"}
+            clipPath="url(#bodyClip)"
           />
-        );
-      })}
-      {avatar.landmarks.eyebrows.map((eyebrow, index) => (
+        )}
         <path
-          key={index}
-          d={simplifySvgPath(eyebrow.map((point) => pointToViewbox(point)))}
+          d={avatar.segments.clothes}
+          fill={avatar.customizations?.colors?.clothes ?? strokeColor}
+          stroke={avatar.customizations?.colors?.clothes ?? strokeColor}
+          strokeWidth={strokeWidth / 2}
+          transform={transform}
+        />
+        <use
+          href="#body"
           fill="none"
-          stroke="black"
-          strokeWidth={1}
-          clipPath="url(#faceClip)"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth}
         />
-      ))}
-      {avatar.landmarks.nose && (
-        <path
-          d={simplifySvgPath(
-            avatar.landmarks.nose.map((point) =>
-              pointToViewbox(point, {
-                x: avatar.landmarks.noseDirection,
-                y: 0,
-              })
-            ),
-            {
-              precision: 2,
-              tolerance: 1,
-            }
-          )}
-          fill="white"
-          stroke="black"
-          strokeWidth={1}
-          clipPath="url(#faceClip)"
+        <use
+          href="#face"
+          fill={avatar.customizations?.colors?.face ?? "#fff"}
         />
-      )}
-      {avatar.landmarks.lips.map((lip, index) => (
-        <path
-          key={index}
-          d={simplifySvgPath(
-            lip.map((point) => pointToViewbox(point)),
-            {
-              tolerance: 0,
-              precision: 10,
-              closed: true,
-            }
-          )}
-          fill="#d4d4d4"
-          stroke="#d4d4d4"
-          strokeWidth={0.25}
-          clipPath="url(#faceClip)"
-        />
-      ))}
-      {avatar.landmarks.ears.map((ear, index) => {
-        const [firstPoint, ...otherPoints] = ear;
+        {features.eyes.map((eye, index) => {
+          const [cx, cy] = pointToViewbox(eye);
 
-        return (
+          return (
+            <ellipse
+              key={index}
+              cx={cx}
+              cy={cy}
+              rx={strokeWidth}
+              ry={strokeWidth * 1.25}
+              clipPath="url(#faceClip)"
+              fill={avatar.customizations?.colors?.eyes ?? strokeColor}
+            />
+          );
+        })}
+        {features.eyebrows.map((eyebrow, index) => (
           <path
             key={index}
-            d={`M ${pointToViewbox(firstPoint).join(" ")} Q ${otherPoints
-              .map((point) => pointToViewbox(point).join(" "))
-              .join(" ")}`}
+            d={simplifySvgPath(eyebrow.map((point) => pointToViewbox(point)))}
             fill="none"
-            stroke="black"
-            strokeWidth={1}
+            stroke={avatar.customizations?.colors?.eyebrows ?? strokeColor}
+            strokeWidth={strokeWidth}
             clipPath="url(#faceClip)"
           />
-        );
-      })}
-      <use href="#face" fill="none" stroke="black" strokeWidth={1} />
-      <path
-        d={avatar.segments.Hair}
-        stroke="black"
-        strokeWidth={1}
-        transform={transform}
-      />
-      <path
-        d={avatar.segments.Accessories}
-        stroke="black"
-        strokeWidth={0.5}
-        transform={transform}
-      />
-    </svg>
+        ))}
+        {features.nose && (
+          <path
+            d={simplifySvgPath(
+              features.nose.map((point) =>
+                pointToViewbox(point, {
+                  x: features.noseDirection,
+                  y: 0,
+                })
+              ),
+              {
+                precision: 2,
+                tolerance: 1,
+              }
+            )}
+            fill={avatar.customizations?.colors?.face ?? "#fff"}
+            stroke={avatar.customizations?.colors?.nose ?? strokeColor}
+            strokeWidth={strokeWidth}
+            clipPath="url(#faceClip)"
+          />
+        )}
+        {features.lips.map((lip, index) => (
+          <path
+            key={index}
+            d={simplifySvgPath(
+              lip.map((point) => pointToViewbox(point)),
+              {
+                tolerance: 0,
+                precision: 10,
+                closed: true,
+              }
+            )}
+            fill={avatar.customizations?.colors?.lips ?? "#e4e4e7"}
+            stroke={avatar.customizations?.colors?.lips ?? "#e4e4e7"}
+            strokeWidth={strokeWidth * 0.25}
+            clipPath="url(#faceClip)"
+          />
+        ))}
+        {features.ears.map((ear, index) => {
+          const [firstPoint, ...otherPoints] = ear;
+
+          return (
+            <path
+              key={index}
+              d={`M ${pointToViewbox(firstPoint).join(" ")} Q ${otherPoints
+                .map((point) => pointToViewbox(point).join(" "))
+                .join(" ")}`}
+              fill="none"
+              stroke={avatar.customizations?.colors?.ears ?? strokeColor}
+              strokeWidth={strokeWidth}
+              clipPath="url(#faceClip)"
+            />
+          );
+        })}
+        <use
+          href="#face"
+          fill="none"
+          stroke={strokeColor}
+          strokeWidth={strokeWidth}
+        />
+        {avatar.segments.hair && (
+          <path
+            d={avatar.segments.hair}
+            fill={avatar.customizations?.colors?.hair ?? strokeColor}
+            stroke={avatar.customizations?.colors?.hair ?? strokeColor}
+            strokeWidth={strokeWidth}
+            transform={transform}
+          />
+        )}
+        {avatar.segments.accessories && (
+          <path
+            d={avatar.segments.accessories}
+            fill={avatar.customizations?.colors?.accessories ?? strokeColor}
+            stroke={avatar.customizations?.colors?.accessories ?? strokeColor}
+            strokeWidth={strokeWidth / 2}
+            transform={transform}
+          />
+        )}
+      </svg>
+    </root.div>
   );
 }

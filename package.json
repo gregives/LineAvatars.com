@@ -6,30 +6,35 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@luncheon/simplify-svg-path": "^0.2.0",
     "@mdi/js": "^7.4.47",
     "@mdi/react": "^1.6.1",
-    "@mediapipe/tasks-vision": "^0.10.18",
-    "next": "15.0.3",
+    "@mediapipe/tasks-vision": "^0.10.20",
+    "@next/bundle-analyzer": "^15.1.6",
+    "nanoid": "^5.0.9",
+    "next": "^15.1.6",
     "paper": "^0.12.18",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-shadow": "^20.6.0",
     "react-webcam": "^7.2.0",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^3.0.1",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
     "@types/image-blob-reduce": "^4.1.4",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.3",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "@types/node": "^20.17.17",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^15.1.6",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3"
   }
 }

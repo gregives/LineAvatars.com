@@ -8,7 +8,7 @@ export function Link({ className, ...properties }: LinkProperties) {
   return (
     <NextLink
       className={twMerge(
-        "rounded hover:opacity-75 hover:saturate-150",
+        "rounded !outline-offset-4 hover:opacity-75 hover:saturate-150",
         className
       )}
       {...properties}

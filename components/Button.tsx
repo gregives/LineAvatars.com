@@ -23,24 +23,24 @@ type ButtonProperties = (
 
 const styles = {
   fill: {
-    teal: "border border-transparent bg-teal-200 hover:bg-teal-300",
-    zinc: "border border-transparent bg-zinc-700 hover:bg-zinc-500 text-white",
+    teal: "bg-teal-600 hover:bg-teal-500 text-white",
+    zinc: "bg-zinc-700 hover:bg-zinc-500 text-white",
   },
   soft: {
-    teal: "border border-transparent bg-teal-500/15 hover:bg-teal-500/30 text-teal-700",
-    zinc: "border border-transparent bg-zinc-500/10 hover:bg-zinc-500/20",
+    teal: "bg-teal-200 hover:bg-teal-300",
+    zinc: "bg-zinc-100 hover:bg-zinc-200",
   },
   outline: {
-    teal: "border border-teal-500/50 hover:border-teal-500 bg-white text-teal-700",
-    zinc: "border border-zinc-500/30 hover:border-zinc-500 bg-white",
+    teal: "ring-2 ring-inset ring-teal-200 hover:ring-teal-400",
+    zinc: "ring-2 ring-inset ring-zinc-200 hover:ring-zinc-400",
   },
   menu: {
-    teal: "border border-transparent hover:bg-teal-500/15 ui-active:bg-teal-500/15 text-teal-700",
-    zinc: "border border-transparent hover:bg-zinc-500/10 ui-active:bg-zinc-500/10",
+    teal: "hover:bg-teal-100 ui-active:bg-teal-100",
+    zinc: "hover:bg-zinc-100 ui-active:bg-zinc-100",
   },
   text: {
-    teal: "border border-transparent hover:bg-teal-500/15 text-teal-700",
-    zinc: "border border-transparent hover:bg-zinc-500/10",
+    teal: "hover:bg-teal-100 text-teal-700",
+    zinc: "hover:bg-zinc-100",
   },
 };
 
@@ -50,7 +50,7 @@ export function Button({
   href,
   size = "md",
   color = "teal",
-  variant = "fill",
+  variant = "soft",
   disabled,
   loading,
   leadingIcon,

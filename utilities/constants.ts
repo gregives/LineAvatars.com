@@ -13,23 +13,17 @@ export const BASE_HOST =
 export const BASE_ORIGIN = `https://${BASE_HOST}`;
 
 export const SEGMENTS = [
-  "Hair",
-  "Body",
-  "Face",
-  "Clothes",
-  "Accessories",
-] as const;
-
-export const FEATURES = [
-  "Eyes",
-  "Eyebrows",
-  "Nose",
-  "Nose direction",
-  "Lips",
-  "Shadow",
-  "Ears",
+  "hair",
+  "body",
+  "face",
+  "clothes",
+  "accessories",
 ] as const;
 
 export const VIEWBOX = 48;
 
 export const CROPPED_RESOLUTION = 1024;
+
+export function capitalizeFirstLetter(string: string) {
+  return String(string).charAt(0).toUpperCase() + String(string).slice(1);
+}

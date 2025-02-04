@@ -11,16 +11,41 @@ export type Bounds = {
   scale: number;
 };
 
-export type Avatar = {
+export type AvatarData = {
+  id: string;
+  createdAt: number;
+  updatedAt: number;
   segments: Record<Segment, string | undefined>;
-  landmarks: {
-    eyes: NormalizedLandmark[];
-    eyebrows: NormalizedLandmark[][];
-    nose: NormalizedLandmark[];
-    noseDirection: number;
-    lips: NormalizedLandmark[][];
-    shadow: NormalizedLandmark[];
-    ears: NormalizedLandmark[][];
-  };
+  landmarks: NormalizedLandmark[];
   bounds: Bounds;
+  customizations?: {
+    strokeWidth?: number;
+    colors?: {
+      outline?: string;
+      background?: string;
+      hair?: string;
+      body?: string;
+      face?: string;
+      clothes?: string;
+      accessories?: string;
+      eyes?: string;
+      eyebrows?: string;
+      nose?: string;
+      lips?: string;
+      shadow?: string;
+      ears?: string;
+    };
+  };
 };
+
+export type Features = {
+  eyes: NormalizedLandmark[];
+  eyebrows: NormalizedLandmark[][];
+  nose: NormalizedLandmark[];
+  noseDirection: number;
+  lips: NormalizedLandmark[][];
+  shadow: NormalizedLandmark[];
+  ears: NormalizedLandmark[][];
+};
+
+export type Feature = keyof Features;

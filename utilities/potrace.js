@@ -1,7 +1,7 @@
 // prettier-ignore
 
 // https://github.com/kilobtye/potrace
-export const Potrace = (function() {
+export const Potrace = function() {
 
   function Point(x, y) {
     this.x = x;
@@ -1270,4 +1270,4 @@ export const Potrace = (function() {
     getSVG: getSVG,
     img: imgElement
   };
-})();
+};

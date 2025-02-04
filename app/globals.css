@@ -15,5 +15,5 @@ strong {
 }
 
 :focus-visible {
-  @apply outline-dashed outline-2 outline-offset-4 outline-zinc-900;
+  @apply outline-dashed outline-2 outline-offset-2 outline-zinc-900;
 }

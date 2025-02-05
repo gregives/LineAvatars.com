@@ -14,7 +14,7 @@ const sans = Inter({
 export const metadata: Metadata = {
   title: {
     template: "%s \u2013 Line Avatars",
-    default: "Line Avatars",
+    default: "Line Avatars \u2013 Generate a Notion-style line avatar",
   },
   metadataBase: new URL(BASE_ORIGIN),
   alternates: {
@@ -29,6 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${sans.variable} h-full text-zinc-900`}>
+      <head>
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+      </head>
       <body className="h-full">
         <div className="w-full max-w-xl mx-auto min-h-full flex flex-col">
           <Header />

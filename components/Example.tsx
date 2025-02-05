@@ -10,7 +10,7 @@ export function Example({
   return (
     <div
       className={twMerge(
-        "relative max-w-sm flex justify-between items-center *:w-[42%]",
+        "relative max-w-sm flex justify-between items-center *:w-[42%] mr-4",
         className
       )}
       {...properties}

@@ -18,7 +18,7 @@
             <use href="#body"></use>
         </clipPath>
     </defs>
-    <use href="#background" fill="white"></use>
+    <use href="#background" fill="#a1a1aa"></use>
     <g clip-path="url(#backgroundClip)">
         <use href="#body" fill="white"></use>
         <path d="M14.83635,26.48685c7.39313,23.0904 15.23916,21.93789 17.69718,-1.28715"

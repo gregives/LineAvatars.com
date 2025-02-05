@@ -29,7 +29,6 @@ const CUSTOMIZABLE_FEATURES = [
   "nose",
   "lips",
   "shadow",
-  "ears",
 ] as const;
 
 type CustomizableFeature = (typeof CUSTOMIZABLE_FEATURES)[number];

@@ -172,22 +172,6 @@ export function Avatar({ avatar, className, ...properties }: AvatarProperties) {
             clipPath="url(#faceClip)"
           />
         ))}
-        {features.ears.map((ear, index) => {
-          const [firstPoint, ...otherPoints] = ear;
-
-          return (
-            <path
-              key={index}
-              d={`M ${pointToViewbox(firstPoint).join(" ")} Q ${otherPoints
-                .map((point) => pointToViewbox(point).join(" "))
-                .join(" ")}`}
-              fill="none"
-              stroke={avatar.customizations?.colors?.ears ?? strokeColor}
-              strokeWidth={strokeWidth}
-              clipPath="url(#faceClip)"
-            />
-          );
-        })}
         <use
           href="#face"
           fill="none"
@@ -208,7 +192,7 @@ export function Avatar({ avatar, className, ...properties }: AvatarProperties) {
             d={avatar.segments.accessories}
             fill={avatar.customizations?.colors?.accessories ?? strokeColor}
             stroke={avatar.customizations?.colors?.accessories ?? strokeColor}
-            strokeWidth={strokeWidth / 2}
+            strokeWidth={strokeWidth}
             transform={transform}
           />
         )}

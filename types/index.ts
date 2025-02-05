@@ -33,7 +33,6 @@ export type AvatarData = {
       nose?: string;
       lips?: string;
       shadow?: string;
-      ears?: string;
     };
   };
 };
@@ -45,7 +44,6 @@ export type Features = {
   noseDirection: number;
   lips: NormalizedLandmark[][];
   shadow: NormalizedLandmark[];
-  ears: NormalizedLandmark[][];
 };
 
 export type Feature = keyof Features;

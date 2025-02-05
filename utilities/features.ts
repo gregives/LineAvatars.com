@@ -151,30 +151,6 @@ export function buildFeatures(avatar: AvatarData): Features {
     avatar.landmarks[14],
   ];
 
-  const ears: NormalizedLandmark[][] = [];
-
-  const leftEarReference1 = avatar.landmarks[227];
-  const leftEarReference2 = avatar.landmarks[234];
-
-  if (leftEarReference1.x - leftEarReference2.x > 0) {
-    ears.push([
-      averageLandmark(leftEarReference1, leftEarReference2, 2),
-      averageLandmark(leftEarReference2, avatar.landmarks[127]),
-      avatar.landmarks[93],
-    ]);
-  }
-
-  const rightEarReference1 = avatar.landmarks[447];
-  const rightEarReference2 = avatar.landmarks[454];
-
-  if (rightEarReference2.x - rightEarReference1.x > 0) {
-    ears.push([
-      averageLandmark(rightEarReference1, rightEarReference2, 2),
-      averageLandmark(rightEarReference2, avatar.landmarks[356]),
-      avatar.landmarks[323],
-    ]);
-  }
-
   return {
     eyes,
     eyebrows: [leftEyebrow, rightEyebrow],
@@ -191,6 +167,5 @@ export function buildFeatures(avatar: AvatarData): Features {
       avatar.landmarks[288],
       avatar.landmarks[323],
     ],
-    ears,
   };
 }

@@ -73,6 +73,7 @@ export function DownloadButton(properties: DownloadButtonProperties) {
           <Button
             className="bg-yellow-400 hover:bg-yellow-500"
             leadingIcon={mdiStar}
+            href="https://donate.stripe.com/5kA7uk7GlaZw4sodQQ"
           >
             Donate
           </Button>

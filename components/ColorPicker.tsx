@@ -40,8 +40,8 @@ export function ColorPicker({
       </Button>
       <Modal open={open} onClose={setOpen}>
         <h1 className="font-semibold mb-6">Pick a color</h1>
-        <div className="relative pb-[10%] mb-1">
-          <div className="absolute inset-0 grid grid-cols-3 gap-1">
+        <div className="relative pb-[10%] mb-2">
+          <div className="absolute inset-0 grid grid-cols-3 gap-2">
             <Button
               color="zinc"
               variant="outline"
@@ -77,14 +77,10 @@ export function ColorPicker({
             </Button>
           </div>
         </div>
-        <div className="grid grid-cols-11 gap-1">
+        <div className="grid grid-cols-11">
           {(
             [
-              "slate",
-              "gray",
               "zinc",
-              "neutral",
-              "stone",
               "red",
               "orange",
               "amber",
@@ -103,7 +99,7 @@ export function ColorPicker({
               "pink",
               "rose",
             ] as const
-          ).flatMap((hue) =>
+          ).flatMap((hue, hueIndex, hues) =>
             (
               [
                 "50",
@@ -118,10 +114,25 @@ export function ColorPicker({
                 "900",
                 "950",
               ] as const
-            ).map((shade) => (
-              <Button
+            ).map((shade, shadeIndex, shades) => (
+              <button
                 key={hue + shade}
-                className="aspect-square rounded-xl hover:opacity-75"
+                className={twMerge(
+                  "aspect-square hover:opacity-75",
+                  shadeIndex === 0
+                    ? hueIndex === 0
+                      ? "rounded-tl-xl"
+                      : hueIndex === hues.length - 1
+                      ? "rounded-bl-xl"
+                      : null
+                    : shadeIndex === shades.length - 1
+                    ? hueIndex === 0
+                      ? "rounded-tr-xl"
+                      : hueIndex === hues.length - 1
+                      ? "rounded-br-xl"
+                      : null
+                    : null
+                )}
                 style={{ backgroundColor: colors[hue][shade] }}
                 onClick={() => {
                   onChange(colors[hue][shade]);
@@ -132,7 +143,7 @@ export function ColorPicker({
                 <span className="sr-only">
                   {capitalizeFirstLetter(hue)} {shade}
                 </span>
-              </Button>
+              </button>
             ))
           )}
         </div>

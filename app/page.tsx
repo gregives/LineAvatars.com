@@ -4,17 +4,11 @@ import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Paragraph } from "@/components/Paragraph";
 import { Webcam } from "@/components/Webcam";
-import {
-  mdiAutorenew,
-  mdiCamera,
-  mdiDownload,
-  mdiPalette,
-  mdiUpload,
-} from "@mdi/js";
+import { mdiAutorenew, mdiCamera, mdiPalette, mdiUpload } from "@mdi/js";
 import { ChangeEventHandler, useRef, useState } from "react";
 import { CROPPED_RESOLUTION } from "@/utilities/constants";
 import Image from "next/image";
-import examplePNG from "@/assets/example.png";
+import exampleJPG from "@/assets/example.jpg";
 import exampleSVG from "@/assets/example.svg";
 import { Avatar } from "@/components/Avatar";
 import { Example } from "@/components/Example";
@@ -115,6 +109,7 @@ export default function HomePage() {
               width={CROPPED_RESOLUTION}
               height={CROPPED_RESOLUTION}
               className="rounded-xl"
+              unoptimized
             />
             {avatar ? (
               <Avatar id="download" avatar={avatar} />
@@ -159,7 +154,7 @@ export default function HomePage() {
           </h1>
           <Example className="my-6">
             <Image
-              src={examplePNG}
+              src={exampleJPG}
               alt="Photo from webcam"
               className="rounded-xl -scale-x-100"
               priority
@@ -187,19 +182,15 @@ export default function HomePage() {
               Take a photo
             </Button>
             <Button
+              as="label"
               variant="outline"
               color="zinc"
               leadingIcon={mdiUpload}
-              onClick={() => {
-                if (uploadRef.current) {
-                  uploadRef.current.click();
-                }
-              }}
               loading={uploading}
+              className="cursor-pointer"
             >
               Upload an image
               <input
-                ref={uploadRef}
                 type="file"
                 accept="image/*"
                 className="sr-only"

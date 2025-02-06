@@ -14,6 +14,7 @@ strong {
   @apply outline-none;
 }
 
-:focus-visible {
+:focus-visible,
+label:has(input.sr-only:focus) {
   @apply outline-dashed outline-2 outline-offset-2 outline-zinc-900;
 }

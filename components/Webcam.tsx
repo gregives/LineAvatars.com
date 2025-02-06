@@ -3,7 +3,6 @@ import { Modal } from "./Modal";
 import { Button } from "./Button";
 import { twMerge } from "tailwind-merge";
 import { useEffect, useRef, useState } from "react";
-import { mdiSync } from "@mdi/js";
 
 type WebcamProperties = React.ComponentProps<typeof Modal> & {
   onCapture: (image: string) => void;
@@ -64,22 +63,6 @@ export function Webcam({
         }}
         ref={webcamRef}
       />
-      <Button
-        color="zinc"
-        variant="soft"
-        className="w-full"
-        leadingIcon={mdiSync}
-        disabled={devices.length < 2}
-        onClick={() => {
-          const currentIndex = devices.findIndex(
-            (device) => device.deviceId === deviceId
-          );
-
-          setDeviceId(devices[(currentIndex + 1) % devices.length].deviceId);
-        }}
-      >
-        Switch webcam
-      </Button>
       <Button onClick={onClick} loading={loading}>
         Capture
       </Button>

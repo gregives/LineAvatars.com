@@ -16,6 +16,8 @@ export const metadata: Metadata = {
     template: "%s \u2013 Line Avatars",
     default: "Line Avatars \u2013 Generate a Notion-style line avatar",
   },
+  description:
+    "Generate Notion-style line avatars for your social media profile photo. Take a photo and we'll use AI to generate a line avatar for you in 30 seconds, for free!",
   metadataBase: new URL(BASE_ORIGIN),
   alternates: {
     canonical: "./",

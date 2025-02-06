@@ -10,7 +10,7 @@ type ButtonProperties = (
   | ({
       href?: undefined;
     } & JSX.IntrinsicElements["button"])
-  | React.ComponentProps<typeof NextLink>
+  | Omit<React.ComponentProps<typeof NextLink>, "as">
 ) & {
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   color?: "zinc" | "teal";
@@ -19,6 +19,7 @@ type ButtonProperties = (
   loading?: boolean;
   leadingIcon?: string;
   trailingIcon?: string;
+  as?: React.ElementType;
 };
 
 const styles = {
@@ -55,6 +56,7 @@ export function Button({
   loading,
   leadingIcon,
   trailingIcon,
+  as: Component = href === undefined ? "button" : NextLink,
   ...properties
 }: ButtonProperties) {
   className = twMerge(
@@ -73,9 +75,13 @@ export function Button({
     className
   );
 
-  return href === undefined ? (
-    // @ts-ignore
-    <button className={className} type="button" {...properties}>
+  return (
+    <Component
+      className={className}
+      type={Component === "button" ? "button" : undefined}
+      href={href}
+      {...properties}
+    >
       {!trailingIcon && loading ? (
         <Icon className="-my-1 animate-spin" path={mdiLoading} />
       ) : leadingIcon ? (
@@ -87,21 +93,6 @@ export function Button({
       ) : trailingIcon ? (
         <Icon className="-my-1" path={trailingIcon} />
       ) : null}
-    </button>
-  ) : (
-    // @ts-ignore
-    <NextLink className={className} href={href} {...properties}>
-      {!trailingIcon && loading ? (
-        <Icon className="-my-1 animate-spin" path={mdiLoading} />
-      ) : leadingIcon ? (
-        <Icon className="-my-1" path={leadingIcon} />
-      ) : null}
-      {children && <span>{children}</span>}
-      {trailingIcon && loading ? (
-        <Icon className="-my-1 animate-spin" path={mdiLoading} />
-      ) : trailingIcon ? (
-        <Icon className="-my-1" path={trailingIcon} />
-      ) : null}
-    </NextLink>
+    </Component>
   );
 }

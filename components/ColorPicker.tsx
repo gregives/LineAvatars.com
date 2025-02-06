@@ -118,7 +118,7 @@ export function ColorPicker({
               <button
                 key={hue + shade}
                 className={twMerge(
-                  "aspect-square hover:opacity-75",
+                  "aspect-square hover:opacity-75 focus:z-10",
                   shadeIndex === 0
                     ? hueIndex === 0
                       ? "rounded-tl-xl"

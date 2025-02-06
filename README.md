@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+![Graphic showing a photo of a person turning into a line avatar](./assets/banner.png)
+
+# [LineAvatars.com](https://lineavatars.com)
+
+Website to generate Notion-style line avatars using Google's [MediaPipe AI models](https://ai.google.dev/edge/mediapipe/solutions/guide). The website runs entirely client-side and stores generated avatars in LocalStorage.
+
+The website is built with the following technologies:
+
+- [MediaPipe Solutions](https://ai.google.dev/edge/mediapipe/solutions/guide)
+- [Potrace](https://potrace.sourceforge.net/)
+- [Next.js](https://nextjs.org)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/gregives/lineavatars.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Install the dependencies using Yarn:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the development server:
 
-## Learn More
+```bash
+yarn dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the development server.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contribute
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I would appreciate help improving LineAvatars.com and the avatars it generates. Here is a list of some improvements I have in mind:
 
-## Deploy on Vercel
+- [ ] Add suite of images to test
+- [ ] Support all skin tones
+- [ ] Support glasses and other accessories
+- [ ] Support hats
+- [ ] Add detail to ears
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Due to [Potrace](https://potrace.sourceforge.net/) being distributed under the GNU General Public License, LineAvatars.com must also be distributed under the GNU General Public License. See the [LICENSE](./LICENSE) file for details.

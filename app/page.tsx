@@ -19,6 +19,7 @@ import { Wrap } from "@/components/Wrap";
 import { Saved } from "@/components/Saved";
 import { AvatarPlaceholder } from "@/components/AvatarPlaceholder";
 import { DownloadButton } from "@/components/DownloadButton";
+import { FAQs } from "@/components/FAQs";
 
 const fileToBase64 = (file: Blob): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -198,6 +199,7 @@ export default function HomePage() {
               />
             </Button>
           </Wrap>
+          <FAQs className="mt-12" />
         </>
       )}
       <Saved />

@@ -3,7 +3,7 @@ export function Logo() {
     <>
       <span className="whitespace-nowrap">
         Line&#8202;Avatars&#8202;
-        <span className="font-light text-zinc-600">.com</span>
+        <span className="font-normal text-zinc-500">.com</span>
       </span>
     </>
   );

@@ -7,6 +7,7 @@ import { Paragraph } from "./Paragraph";
 import { Wrap } from "./Wrap";
 import Image from "next/image";
 import signature from "@/assets/signature.svg";
+import { DonateButton } from "./DonateButton";
 
 function download(filename: string, avatar: string) {
   const element = document.createElement("a");
@@ -70,13 +71,7 @@ export function DownloadButton(properties: DownloadButtonProperties) {
           Creator of <Logo />
         </Paragraph>
         <Wrap>
-          <Button
-            className="bg-yellow-400 hover:bg-yellow-500"
-            leadingIcon={mdiStar}
-            href="https://donate.stripe.com/5kA7uk7GlaZw4sodQQ"
-          >
-            Donate
-          </Button>
+          <DonateButton />
           <Button color="zinc" onClick={() => setOpen(false)}>
             No thanks
           </Button>
